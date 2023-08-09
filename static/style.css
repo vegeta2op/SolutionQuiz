@@ -1,0 +1,274 @@
+body {
+  background-color: antiquewhite;
+}
+
+.side1, .side2 ,.container{
+  display: inline-grid;
+}
+
+.box {
+  border: 4px solid black;
+  background-color: white;
+  margin: 10px;
+  padding: 15px;
+  border-radius: 30px;
+  transition: background-color 0.3s ease;
+}
+
+.box.correct {
+  background-color: lightgreen;
+}
+
+.box.incorrect {
+  background-color: salmon;
+}
+
+.box input[type="text"] {
+  border: none;
+  outline: none;
+  font-size: x-large;
+}
+
+.box input[type="text"]::placeholder {
+  color: #555;
+  font-weight: bold;
+}
+
+.box input[type="text"] {
+  border: none;
+  outline: none;
+  font-size: x-large;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.correct input[type="text"] {
+  background-color: lightgreen;
+}
+
+.incorrect input[type="text"] {
+  background-color: salmon;
+}
+
+
+
+@import url(https://fonts.googleapis.com/css?family=Exo+2:400,700,500,300);
+.container {
+  position: relative;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 500px;
+  height:200px;
+}
+
+.downloader {
+  width: 450px;
+}
+
+.downloading-progress {
+  position: relative;
+  float: left;
+  width: 300px;
+  height: 20px;
+  background-color: rgba(0,0,0,0.15);
+  padding: 5px;  
+  box-sizing: border-box;
+  border-radius: 10px;
+}
+
+.downloading-progress-bar {
+  position: relative;
+  width: 0%;
+  height: 10px;
+  border-radius: 8px;    
+  background-color: white;
+}
+
+.percentage {
+  background-color: #D9290B;
+  border-radius: 15px;
+  height: 20px; 
+  box-sizing: border-box;
+  width: 50px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: white;
+  font-size: 0.8rem;
+  text-align: center;  
+  float:left;
+  line-height: 20px !important;
+  margin: 0 0 0 10px;
+}
+.image-container {
+  position: relative;
+}
+
+.base-image {
+  display: block;
+  width: 50%;
+  height: auto;
+}
+
+.color-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: blue; /* Initial color */
+  opacity: 0; /* Initially transparent */
+  transition: opacity 0.5s ease; /* Transition for reveal effect */
+}
+.letter-image {
+  position: absolute;
+  top: 50%;
+  right: 0px;
+  width: 260px;
+  height: 260px;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+}
+
+.animated-mail {
+  position: absolute;
+  height: 150px;
+  width: 200px;
+  -webkit-transition: 0.4s;
+  -moz-transition: 0.4s;
+  transition: 0.4s;
+}
+.animated-mail .body {
+  position: absolute;
+  bottom: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 0 100px 200px;
+  border-color: transparent transparent #e95f55 transparent;
+  z-index: 2;
+}
+.animated-mail .top-fold {
+  position: absolute;
+  top: 50px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 50px 100px 0 100px;
+  -webkit-transform-origin: 50% 0%;
+  -webkit-transition: transform 0.4s 0.4s, z-index 0.2s 0.4s;
+  -moz-transform-origin: 50% 0%;
+  -moz-transition: transform 0.4s 0.4s, z-index 0.2s 0.4s;
+  transform-origin: 50% 0%;
+  transition: transform 0.4s 0.4s, z-index 0.2s 0.4s;
+  border-color: #cf4a43 transparent transparent transparent;
+  z-index: 2;
+}
+.animated-mail .back-fold {
+  position: absolute;
+  bottom: 0;
+  width: 200px;
+  height: 100px;
+  background: #cf4a43;
+  z-index: 0;
+}
+.animated-mail .left-fold {
+  position: absolute;
+  bottom: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 50px 0 50px 100px;
+  border-color: transparent transparent transparent #e15349;
+  z-index: 2;
+}
+.animated-mail .letter {
+  left: 20px;
+  bottom: 0px;
+  position: absolute;
+  width: 160px;
+  height: 60px;
+  background: white;
+  z-index: 1;
+  overflow: hidden;
+  -webkit-transition: 0.4s 0.2s;
+  -moz-transition: 0.4s 0.2s;
+  transition: 0.4s 0.2s;
+}
+.animated-mail .letter .letter-border {
+  height: 10px;
+  width: 100%;
+  background: repeating-linear-gradient(-45deg, #cb5a5e, #cb5a5e 8px, transparent 8px, transparent 18px);
+}
+.animated-mail .letter .letter-title {
+  margin-top: 10px;
+  margin-left: 5px;
+  height: 10px;
+  width: 40%;
+  background: #cb5a5e;
+}
+.animated-mail .letter .letter-context {
+  margin-top: 10px;
+  margin-left: 5px;
+  height: 10px;
+  width: 20%;
+  background: #cb5a5e;
+}
+.animated-mail .letter .letter-stamp {
+  margin-top: 30px;
+  margin-left: 120px;
+  border-radius: 100%;
+  height: 30px;
+  width: 30px;
+  background: #cb5a5e;
+  opacity: 0.3;
+}
+
+.shadow {
+  position: absolute;
+  top: 200px;
+  left: 50%;
+  width: 400px;
+  height: 30px;
+  transition: 0.4s;
+  transform: translateX(-50%);
+  -webkit-transition: 0.4s;
+  -webkit-transform: translateX(-50%);
+  -moz-transition: 0.4s;
+  -moz-transform: translateX(-50%);
+  border-radius: 100%;
+  background: radial-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0));
+}
+
+
+
+/* Add the open animation to open the envelope */
+.open-envelope .animated-mail {
+  transform: translateY(50px);
+}
+
+.open-envelope .animated-mail .top-fold {
+  transform: rotateX(180deg);
+  z-index: 0;
+}
+
+.open-envelope .animated-mail .letter {
+  height: 180px;
+}
+
+.open-envelope .shadow {
+  width: 250px;
+}
+#amazon-link-container {
+  display: none;
+  text-align: center; 
+}
+
+#amazonlink.show {
+  display: block;
+}
+
+#amazon-link-container a img {
+  max-width: 100%; 
+}

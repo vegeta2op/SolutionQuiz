@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<title>Game</title>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="/static/style.css">
+    <style>
+      button {
+            padding: 10px 20px;
+            font-size: 14px;
+            border: none;
+            background-color: #3498db;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        p {
+            margin-top: 20px;
+        }
+        #copy-message {
+            margin-top: 10px;
+            color: green;
+        }
+    </style>
+</head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.3.2/purify.min.js"></script>
+<script>const sanitizedInput = DOMPurify.sanitize(userInput);</script>
+<body>
+    <h1>Welcome, Solve the puzzle to Buy a helpful book on Amazon(Free books Soon!!)</h1>
+    <button id="copy-button1">Copy "homogeneous" to Clipboard</button>
+    
+    <button id="copy-button2">Copy "heterogeneous" to Clipboard</button>
+    
+    <p id="copy-message"></p>
+    <br>
+
+<div class="side1">
+  <div class="box type1" id="box1">
+      <input type="text" class="quiz-input type1" name="type" placeholder="Water">
+  </div>
+  <div class="box type2" id="box2">
+      <input type="text" class="quiz-input type2" name="type" placeholder="Oil">
+  </div>
+  <div class="box" id="box3">
+      <input type="text" class="quiz-input type3" name="type" placeholder="Milk">
+  </div>
+  <div class="box" id="box4">
+      <input type="text" class="quiz-input type4" name="type" placeholder="Vinegar">
+  </div>
+  <div class="box" id="box5">
+      <input type="text" class="quiz-input type5" name="type" placeholder="Syrup">
+  </div>
+  <div class="box" id="box6">
+      <input type="text" class="quiz-input type6" name="type" placeholder="Juice">
+  </div>
+</div>
+<div class="letter-image" id="envelope">
+  <div class="animated-mail">
+    <div class="back-fold"></div>
+    <div class="letter">
+        <a href="https://www.amazon.in/Foundation-Chemistry-Curriculum-Guidelines-Preparation/dp/9356069468?crid=332BSM177NDM5&keywords=chemistry+book+class+8&qid=1691613054&sprefix=chemisty+book+class+%2Caps%2C210&sr=8-1&linkCode=li2&tag=harshitarora1-21&linkId=d1109ce7a8eced1ddaef7cb5673a164d&language=en_IN&ref_=as_li_ss_il" target="_blank" >
+          <img src="//ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=9356069468&Format=_SL160_&ID=AsinImage&MarketPlace=IN&ServiceVersion=20070822&WS=1&tag=harshitarora1-21&language=en_IN" >
+        </a>
+      <div class="letter-border"></div>
+      <div class="letter-title"></div>
+      <div class="letter-context"></div>
+      <div class="letter-stamp">
+        <div class="letter-stamp-inner"></div>
+      </div>
+    </div>
+    <div class="top-fold"></div>
+    <div class="body"></div>
+    <div class="left-fold"></div>
+  </div>
+  <div class="shadow"></div>
+</div>
+
+<div class="side2">
+  <div class="box" id="box7">
+      <input type="text" class="quiz-input type7" name="type" placeholder="Honey">
+  </div>
+  <div class="box" id="box8">
+      <input type="text" class="quiz-input type8" name="type" placeholder="Soap">
+  </div>
+  <div class="box" id="box9">
+      <input type="text" class="quiz-input type9" name="type" placeholder="Mercury">
+  </div>
+  <div class="box" id="box10">
+      <input type="text" class="quiz-input type10" name="type" placeholder="Alcohol">
+  </div>
+  <div class="box" id="box11">
+      <input type="text" class="quiz-input type11" name="type" placeholder="Honey">
+  </div>
+  <div class="box" id="box12">
+      <input type="text" class="quiz-input type12" name="type" placeholder="Tea">
+  </div>   
+</div>
+</body>
+
+<!-- Your existing HTML and head section -->
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.quiz-input').on('blur', function() {
+            const inputValue = $(this).val().trim();
+            const box = $(this).closest('.box');
+            const inputType = box.attr('id');
+
+            if (inputValue === "") {
+                box.removeClass('correct incorrect');
+                return;
+            }
+
+            // Disable the input field during the request
+            $(this).prop('disabled', true);
+
+            $.ajax({
+                url: '/check_answer',
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({ answer: inputValue, type: inputType }),
+                success: function(response) {
+                    box.removeClass('correct incorrect');
+
+                    if (response.is_correct) {
+                        box.addClass('correct');
+                        correctAnswersCount++;
+
+                        // Check if all answers are correct and trigger envelope opening
+                        if (correctAnswersCount === 12) {
+                            completePuzzle();
+                        }
+                    } else {
+                        box.addClass('incorrect');
+                    }
+
+                    // Re-enable the input field after the request completes
+                    $(this).prop('disabled', false);
+                },
+                error: function() {
+                    // Re-enable the input field on error
+                    $(this).prop('disabled', false);
+                }
+            });
+        });
+    });
+
+    let correctAnswersCount = 0;
+
+    function completePuzzle() {
+        const envelope = document.querySelector('.letter-image');
+        envelope.classList.add('open-envelope');
+        
+        // Show the embedded Amazon book link container
+        $('#amazon-link-container').addClass('show');
+    }
+</script>
+<script>
+  const copyTexts = [
+      "homogeneous",
+      "heterogeneous"
+  ];
+
+  // Function to copy text to the clipboard
+  function copyToClipboard(text) {
+      const textarea = document.createElement("textarea");
+      textarea.value = text;
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand("copy");
+      document.body.removeChild(textarea);
+  }
+  
+  // Event listeners for copy buttons
+  document.getElementById("copy-button1").addEventListener("click", function() {
+      copyToClipboard(copyTexts[0]);
+      showCopyMessage(copyTexts[0]);
+  });
+
+  document.getElementById("copy-button2").addEventListener("click", function() {
+      copyToClipboard(copyTexts[1]);
+      showCopyMessage(copyTexts[1]);
+  });
+
+  // Function to display copy confirmation message
+  function showCopyMessage(text) {
+      const copyMessage = document.getElementById("copy-message");
+      copyMessage.textContent = `"${text}" has been copied to clipboard.`;
+      setTimeout(() => {
+          copyMessage.textContent = "";
+      }, 3000); // Clear the message after 3 seconds
+  }
+</script>
+
+
+</html>
